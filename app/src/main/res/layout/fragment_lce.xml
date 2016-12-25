@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/included_loading"
+            layout="@layout/view_loading" />
+
+        <include
+            android:id="@+id/included_error"
+            layout="@layout/view_error" />
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/contentView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                android:clipToPadding="false" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </FrameLayout>
+
+</layout>

@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+    defaultConfig {
+        applicationId "com.berdnikov.dmitry.architectureexample"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        enabled true
+    }
+}
+
+ext {
+    supportLibraryVersion = '25.1.0'
+    playServicesVersion = '9.6.1'
+    retrofitVersion = '2.1.0'
+    okhttpVersion = '3.4.1'
+    daggerVersion = '2.7'
+    butterknifeVersion = '8.4.0'
+    storIoVersion = '1.12.0'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+
+    // Google design widjets and libaries
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
+
+    // Rxjava and etc
+    compile 'io.reactivex:rxjava:1.2.1'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.f2prateek.rx.preferences:rx-preferences:1.0.2'
+
+    // Retrofit and other network libs
+    compile ("com.squareup.retrofit2:retrofit:$retrofitVersion") {
+        exclude module: 'okhttp'
+    }
+    compile "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // Glide
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
+
+    // DI framework
+    compile "com.google.dagger:dagger:$daggerVersion"
+    apt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    apt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+
+    // StorIO
+    compile "com.pushtorefresh.storio:sqlite:$storIoVersion"
+    compile "com.pushtorefresh.storio:sqlite-annotations:$storIoVersion"
+    apt "com.pushtorefresh.storio:sqlite-annotations-processor:$storIoVersion"
+
+    // CircularProgressBar
+    compile 'com.github.castorflex.smoothprogressbar:library-circular:1.2.0'
+}
