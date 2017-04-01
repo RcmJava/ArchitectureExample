@@ -1,6 +1,7 @@
 package com.berdnikov.dmitry.architectureexample.network;
 
-import com.android.annotations.NonNull;
+import android.support.annotation.NonNull;
+
 import com.berdnikov.dmitry.architectureexample.BuildConfig;
 import com.google.gson.Gson;
 
@@ -21,14 +22,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiModule {
     private static final String BASE_URL = "http://test.ru/";
 
-    @Provides @NonNull @Singleton
+    @Provides @NonNull
+    @Singleton
     public Api provideApi(@NonNull OkHttpClient okHttpClient, @NonNull Gson gson) {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .validateEagerly(BuildConfig.DEBUG)  // Fail early: check Retrofit configuration at creation time in Debug build.
+                .validateEagerly(BuildConfig.DEBUG)
                 .build()
                 .create(Api.class);
     }

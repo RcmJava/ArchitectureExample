@@ -1,10 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.berdnikov.dmitry.architectureexample"
         minSdkVersion 21
@@ -29,12 +28,11 @@ android {
 }
 
 ext {
-    supportLibraryVersion = '25.1.0'
+    supportLibraryVersion = '25.3.1'
     playServicesVersion = '9.6.1'
     retrofitVersion = '2.1.0'
     okhttpVersion = '3.4.1'
     daggerVersion = '2.7'
-    butterknifeVersion = '8.4.0'
     storIoVersion = '1.12.0'
 }
 
@@ -49,6 +47,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:$supportLibraryVersion"
     compile "com.android.support:design:$supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    compile 'com.android.support:support-annotations:25.3.1'
 
     // Rxjava and etc
     compile 'io.reactivex:rxjava:1.2.1'
@@ -70,15 +69,12 @@ dependencies {
 
     // DI framework
     compile "com.google.dagger:dagger:$daggerVersion"
-    apt "com.google.dagger:dagger-compiler:$daggerVersion"
-
-    compile "com.jakewharton:butterknife:$butterknifeVersion"
-    apt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    annotationProcessor  "com.google.dagger:dagger-compiler:$daggerVersion"
 
     // StorIO
     compile "com.pushtorefresh.storio:sqlite:$storIoVersion"
     compile "com.pushtorefresh.storio:sqlite-annotations:$storIoVersion"
-    apt "com.pushtorefresh.storio:sqlite-annotations-processor:$storIoVersion"
+    annotationProcessor  "com.pushtorefresh.storio:sqlite-annotations-processor:$storIoVersion"
 
     // CircularProgressBar
     compile 'com.github.castorflex.smoothprogressbar:library-circular:1.2.0'
