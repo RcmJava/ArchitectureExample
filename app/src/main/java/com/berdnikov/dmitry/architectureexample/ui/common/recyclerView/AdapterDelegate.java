@@ -12,19 +12,16 @@ import java.util.List;
  */
 
 public abstract class AdapterDelegate<T> {
-    protected final LayoutInflater inflater;
-
-    public AdapterDelegate(LayoutInflater inflater) {
-        this.inflater = inflater;
-    }
 
     protected abstract boolean isForViewType(@NonNull List<T> items, int position);
 
     @NonNull
-    abstract protected RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent);
+    abstract protected RecyclerView.ViewHolder onCreateViewHolder(LayoutInflater layoutInflater, ViewGroup parent);
 
-    protected abstract void onBindViewHolder(@NonNull List<T> items, int position,
-                                             @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads);
+    protected abstract void onBindViewHolder(@NonNull List<T> items,
+                                             int position,
+                                             @NonNull RecyclerView.ViewHolder holder,
+                                             @NonNull List<Object> payloads);
 
     protected void onViewRecycled(@NonNull RecyclerView.ViewHolder viewHolder) {
     }

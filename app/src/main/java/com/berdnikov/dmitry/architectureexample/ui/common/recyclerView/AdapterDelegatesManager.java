@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.Collections;
@@ -20,6 +21,8 @@ public class AdapterDelegatesManager<T> {
 
     protected SparseArrayCompat<AdapterDelegate<T>> delegates = new SparseArrayCompat();
     protected AdapterDelegate<T> fallbackDelegate;
+
+    private LayoutInflater layoutInflater;
 
     public AdapterDelegatesManager<T> addDelegate(@NonNull AdapterDelegate<T> delegate) {
         int viewType = delegates.size();
@@ -83,6 +86,10 @@ public class AdapterDelegatesManager<T> {
         return this;
     }
 
+    public void setLayoutInflater(LayoutInflater inflater) {
+        layoutInflater = inflater;
+    }
+
     public int getItemViewType(@NonNull List<T> items, int position) {
 
         if (items == null) {
@@ -112,7 +119,7 @@ public class AdapterDelegatesManager<T> {
             throw new NullPointerException("No AdapterDelegate added for ViewType " + viewType);
         }
 
-        RecyclerView.ViewHolder vh = delegate.onCreateViewHolder(parent);
+        RecyclerView.ViewHolder vh = delegate.onCreateViewHolder(layoutInflater, parent);
         if (vh == null) {
             throw new NullPointerException("ViewHolder returned from AdapterDelegate "
                     + delegate

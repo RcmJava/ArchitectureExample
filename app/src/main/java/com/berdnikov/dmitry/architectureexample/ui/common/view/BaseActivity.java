@@ -17,6 +17,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        doInjections(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getLayoutRes());
     }
 

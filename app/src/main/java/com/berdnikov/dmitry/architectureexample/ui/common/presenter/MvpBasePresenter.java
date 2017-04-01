@@ -56,39 +56,4 @@ public class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
             subscriptionsToUnsubscribeOnUnbindView.add(s);
         }
     }
-
-  /*  @Override
-    public void onCreate(Bundle bundle) {
-
-    }
-
-    @Override
-    public void onDestroy() {
-
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onStart() {
-
-    }
-
-    @Override
-    public void onStop() {
-
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-
-    }*/
 }

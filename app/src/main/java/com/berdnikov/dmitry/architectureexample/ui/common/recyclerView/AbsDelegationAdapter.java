@@ -2,6 +2,7 @@ package com.berdnikov.dmitry.architectureexample.ui.common.recyclerView;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import java.util.List;
 public abstract class AbsDelegationAdapter<T> extends RecyclerView.Adapter {
     protected AdapterDelegatesManager<T> delegatesManager;
     protected List<T> items = new ArrayList<>();
+
+    private LayoutInflater layoutInflater;
 
     public AbsDelegationAdapter() {
         this(new AdapterDelegatesManager<T>());
@@ -72,6 +75,15 @@ public abstract class AbsDelegationAdapter<T> extends RecyclerView.Adapter {
         delegatesManager.onViewDetachedFromWindow(holder);
     }
 
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        if (layoutInflater == null) {
+            layoutInflater = LayoutInflater.from(recyclerView.getContext());
+        }
+        delegatesManager.setLayoutInflater(layoutInflater);
+    }
+
     public List<T> getItems() {
         return items;
     }
@@ -116,9 +128,6 @@ public abstract class AbsDelegationAdapter<T> extends RecyclerView.Adapter {
     public void removeChild(int position) {
         items.remove(position);
         notifyItemRemoved(position);
-        /*int positionStart = position;
-        int itemCount = items.size() - position;
-        notifyItemRangeChanged(positionStart, itemCount);*/
     }
 
     public void clear() {
